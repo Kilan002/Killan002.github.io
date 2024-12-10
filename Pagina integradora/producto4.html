@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producto - Producto1</title>
+    <link rel="stylesheet" href="producto.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="index.html">
+                <img src="logo.png" alt="Logo" class="logo-img">
+            </a>
+        </div>
+        <nav class="nav">
+            
+            <a href="index.html" class="nav-link">Inicio</a>
+            <a href="usuarios.php" class="nav-link">Usuarios</a>
+            <a href="login.html">
+                <img src="login.png" alt="Login" class="login-icon">
+            </a>
+        </nav>
+    </header>
+    <div class="product-page">
+        <div class="product-gallery">
+            <div class="main-image">
+                <img src="product4.webp" alt="Producto principal" class="main-image-img" id="mainImage">
+            </div>
+            <div class="thumbnail-gallery">
+                <img src="product4.webp" alt="Imagen pequeña 1" class="thumbnail" onclick="changeImage('product4.webp')">
+                
+            </div>
+        </div>
+        <div class="product-details">
+            <h1>honda</h1>
+            <p class="price">$90.000</p>
+            <p class="description">
+                Versión: 1.6 Pack Ii 101cv 3p
+configuración del eje: Delantera
+*VOLKSWAGEN AUTOTAG S.A
+CONCESIONARIO OFICIAL
+CONCESIONARIO # 1 EN VENTAS !!    
+            </p>
+            <button class="buy-btn">Comprar ahora</button>
+        </div>
+    </div>
+
+    <script>
+        function changeImage(image) {
+            document.getElementById('mainImage').src = image;
+        }
+    </script>
+</body>
+</html>
