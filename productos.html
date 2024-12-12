@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+    <link rel="stylesheet" href="productos.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <a href="index.php">
+                <img src="logo.png" alt="Logo" class="logo-img">
+            </a>
+        </div>
+        <nav class="nav">
+            <a href="index.php" class="nav-link">Home</a>
+            <a href="usuarios.php" class="nav-link">Usuario</a>
+            <a href="#" id="add-product-btn" class="nav-link" style="display: none;">Agregar Producto</a>
+        </nav>
+    </header>
+
+    <!-- Formulario para agregar productos (visible solo para vendedores) -->
+    <div id="product-form" style="display: none;">
+        <h2>Agregar Nuevo Producto</h2>
+        <form id="add-product-form">
+            <label for="product-image">Imagen del Producto:</label>
+            <input type="file" id="product-image" accept="image/*" required>
+            <label for="product-description">Descripción:</label>
+            <textarea id="product-description" rows="3" required></textarea>
+            <button type="submit">Agregar Producto</button>
+        </form>
+    </div>
+
+    <!-- Contenedor de productos -->
+    <div id="product-container" class="product-container">
+        <!-- Productos dinámicamente añadidos aquí -->
+    </div>
+
+    <script>
+        // Control de visibilidad del formulario
+        const addProductBtn = document.getElementById('add-product-btn');
+        const productForm = document.getElementById('product-form');
+        const addProductForm = document.getElementById('add-product-form');
+        const productContainer = document.getElementById('product-container');
+
+        addProductBtn.addEventListener('click', () => {
+            productForm.style.display = 'block';
+        });
+
+        // Manejar la adición de productos
+        addProductForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Obtener valores del formulario
+            const productImage = document.getElementById('product-image').files[0];
+            const productDescription = document.getElementById('product-description').value;
+
+            if (productImage && productDescription) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    // Crear contenedor de producto
+                    const productDiv = document.createElement('div');
+                    productDiv.classList.add('product');
+
+                    // Imagen
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = 'Producto';
+                    img.classList.add('product-img');
+
+                    // Descripción
+                    const desc = document.createElement('p');
+                    desc.textContent = productDescription;
+
+                    productDiv.appendChild(img);
+                    productDiv.appendChild(desc);
+                    productContainer.appendChild(productDiv);
+
+                    // Limpiar formulario
+                    addProductForm.reset();
+                    productForm.style.display = 'none';
+                };
+
+                reader.readAsDataURL(productImage);
+            }
+        });
+    </script>
+</body>
+</html>

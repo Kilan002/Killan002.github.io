@@ -27,7 +27,7 @@ $stmt->bind_param("sssi", $nombre, $apellido, $password_hashed, $role);
 if ($stmt->execute()) {
     echo "<script>
             alert('Registro exitoso');
-            window.location.href = 'index.html';
+            window.location.href = 'index.php';
           </script>";
 } else {
     echo "Error: " . $stmt->error;

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Producto</title>
+    <link rel="stylesheet" href="agrega_prod.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="index.php">
+                <img src="logo.png" alt="Logo" class="logo-img">
+            </a>
+        </div>
+        <nav class="nav">
+            <?php if (isset($_SESSION['role']) && (int)$_SESSION['role'] === 1): ?>
+                <a href="agregar_producto.php" id="add-product-btn" class="nav-link">Agregar Producto</a>
+            <?php endif; ?>
+            <a href="index.php" class="nav-link">Inicio</a>
+            <a href="usuarios.php" class="nav-link">Usuarios</a>
+            <a href="login.html">
+                <img src="login.png" alt="Login" class="login-icon">
+            </a>
+        </nav>
+    </header>
+    <div class="form-container">
+        <h2>Agregar Producto</h2>
+        <form action="agregar_producto.php" method="POST" enctype="multipart/form-data">
+            <div class="input-group">
+                <label for="imagen">Imagen del Producto:</label>
+                <input type="file" name="imagen" id="imagen" accept="image/*" required>
+            </div>
+            <div class="input-group">
+                <label for="descripcion">Descripción:</label>
+                <textarea name="descripcion" id="descripcion" rows="5" placeholder="Descripción del producto" required></textarea>
+            </div>
+            <button type="submit" class="btn-submit">Agregar Producto</button>
+        </form>
+    </div>
+</body>
+</html>

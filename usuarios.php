@@ -35,12 +35,12 @@ $conn->close();
 <body>
     <header class="header">
         <div class="logo">
-            <a href="index.html">
+            <a href="index.php">
                 <img src="logo.png" alt="Logo" class="logo-img">
             </a>
         </div>
         <nav class="nav">
-            <a href="index.html" class="nav-link">Inicio</a>
+            <a href="index.php" class="nav-link">Inicio</a>
             <a href="usuarios.php" class="nav-link">Usuarios</a>
             <a href="login.html">
                 <img src="login.png" alt="Login" class="login-icon">
@@ -49,10 +49,9 @@ $conn->close();
     </header>
 
     <div class="user-profile">
-        <div >
-            <h2>Editar Información del Usuario</h2>
-        </div>
+       
         <form action="actualizar_usuario.php" method="POST" class="user-form">
+        <h2>Editar Información del Usuario</h2></br>
             <div class="input-group">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" value="<?php echo htmlspecialchars($user['nombre']); ?>" required>

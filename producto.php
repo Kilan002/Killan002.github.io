@@ -1,9 +1,44 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "integradora";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
+}
+
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $id = (int)$_GET['id'];
+
+    $sql = "SELECT * FROM productos WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $producto = $result->fetch_assoc();
+    } else {
+        die("Producto no encontrado.");
+    }
+} else {
+    die("ID inválido.");
+}
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Producto - Producto1</title>
+    <title>Producto - <?php echo isset($producto['titulo']) ? htmlspecialchars($producto['titulo']) : "Título no disponible"; ?></title>
     <link rel="stylesheet" href="producto.css">
 </head>
 <body>
@@ -14,7 +49,6 @@
             </a>
         </div>
         <nav class="nav">
-            
             <a href="index.php" class="nav-link">Inicio</a>
             <a href="usuarios.php" class="nav-link">Usuarios</a>
             <a href="login.html">
@@ -25,30 +59,15 @@
     <div class="product-page">
         <div class="product-gallery">
             <div class="main-image">
-                <img src="product1.jpg" alt="Producto principal" class="main-image-img" id="mainImage">
-            </div>
-            <div class="thumbnail-gallery">
-                <img src="product1.jpg" alt="Imagen pequeña 1" class="thumbnail" onclick="changeImage('product1.jpg')">
-                <img src="product1-2.jpg" alt="Imagen pequeña 2" class="thumbnail" onclick="changeImage('product1-2.jpg')">
-                <img src="product1-3.jpg" alt="Imagen pequeña 3" class="thumbnail" onclick="changeImage('product1-3.jpg')">
-                
+                <img src="<?php echo htmlspecialchars($producto['imagen']); ?>" alt="Producto principal" class="main-image-img" id="mainImage">
             </div>
         </div>
         <div class="product-details">
-            <h1>volkswagen gol</h1>
-            <p class="price">$60.000</p>
-            <p class="description">
-                Versión: 1.6 Pack Ii 101cv 3p
-configuración del eje: Delantera
-*VOLKSWAGEN AUTOTAG S.A
-CONCESIONARIO OFICIAL
-CONCESIONARIO # 1 EN VENTAS !!    
-            </p>
-            <button class="buy-btn" onclick="openModal()">Comprar ahora</button>
-        </div>
-    </div>
-
-    <script>
+            <h1><?php echo isset($producto['titulo']) ? htmlspecialchars($producto['titulo']) : "Título no disponible"; ?></h1>
+            <p class="price">$ <?php echo isset($producto['precio']) ? htmlspecialchars($producto['precio']) : "No disponible"; ?></p>
+            <p class="description"><?php echo isset($producto['descripcion']) ? htmlspecialchars($producto['descripcion']) : "No disponible"; ?></p>
+            <button class="buy-btn" onclick="openModal()">Comprar ahora</button>           
+             <script>
         function changeImage(image) {
             document.getElementById('mainImage').src = image;
         }

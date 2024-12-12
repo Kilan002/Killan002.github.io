@@ -73,8 +73,6 @@ $conn->close();
             <button onclick="editField('password', '')">Editar</button>
         </div>
     </div>
-
-    <!-- Modal para edición -->
     <div id="editModal" class="modal" style="display: none;">
         <div class="modal-content">
             <h3>Editar <span id="fieldName"></span></h3>
