@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Principal</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const staticProducts = [
+                {
+                    image: "product1.jpg",
+                    title: "Volkswagen Golf",
+                    description: "60,000 MXN",
+                    link: "producto1.html"
+                },
+                {
+                    image: "product2.png",
+                    title: "Ford Focus",
+                    description: "120,000 MXN",
+                    link: "producto2.html"
+                },
+                {
+                    image: "product3.webp",
+                    title: "Toyota",
+                    description: "95,000 MXN",
+                    link: "producto3.html"
+                },
+                {
+                    image: "product4.webp",
+                    title: "Honda",
+                    description: "90,000 MXN",
+                    link: "producto4.html"
+                }
+            ];
+
+            // Simular productos dinámicos
+            const dynamicProducts = [
+                {
+                    image: "dynamic1.jpg",
+                    title: "Chevrolet Malibu",
+                    description: "75,000 MXN",
+                    link: "producto_dinamico1.html"
+                },
+                {
+                    image: "dynamic2.jpg",
+                    title: "Nissan Sentra",
+                    description: "85,000 MXN",
+                    link: "producto_dinamico2.html"
+                }
+            ];
+
+            const carouselTrack = document.querySelector(".carousel-track");
+
+            [...staticProducts, ...dynamicProducts].forEach(product => {
+                const productCard = document.createElement("div");
+                productCard.classList.add("product-card");
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="${product.title}" class="product-image">
+                    <h3 class="product-title">${product.title}</h3>
+                    <p class="product-description">${product.description}</p>
+                    <a href="${product.link}" class="product-link">Ver más</a>
+                `;
+                carouselTrack.appendChild(productCard);
+            });
+        });
+    </script>
+</head>
+<body>
+<header class="header">
+    <div class="logo">
+        <a href="index.html">
+            <img src="logo.png" alt="Logo" class="logo-img">
+        </a>
+    </div>
+    <nav class="nav">
+        <a href="index.html" class="nav-link">Inicio</a>
+        <a href="usuarios.html" class="nav-link">Usuarios</a>
+        <a href="login.html">
+            <img src="login.png" alt="Login" class="login-icon">
+        </a>
+    </nav>
+</header>
+
+<div class="carousel">
+    <div class="carousel-track-container">
+        <div class="carousel-track">
+            <!-- Los productos serán cargados dinámicamente aquí -->
+        </div>
+    </div>
+    <button class="carousel-button left">◀</button>
+    <button class="carousel-button right">▶</button>
+</div>
+
+<footer>
+    <p class="centrado">Lorenzo Antonio Heredia Bernal
+        <br>
+    Luis Enrique Pérez Rosales
+    <br>
+    juan carlos santos carrillo
+    </p>
+    <style>
+        p.centrado{
+            text-align:center;
+        }
+    </style>
+</footer>
+
+<script src="javascript.js"></script>
+</body>
+</html>
